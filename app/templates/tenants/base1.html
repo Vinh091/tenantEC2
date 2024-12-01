@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Trang chủ</title>
+    <style>
+        body {
+            font-family: sans-serif; /* Sử dụng font chữ sans-serif */
+        }
+
+        .container {
+            max-width: 800px; /* Giới hạn chiều rộng tối đa của container */
+            margin: 0 auto; /* Căn giữa container */
+            padding: 20px; /* Thêm padding cho container */
+            border: 1px solid #ccc; /* Thêm border cho container */
+        }
+
+        h1 {
+            text-align: center; /* Căn giữa tiêu đề */
+        }
+
+        .flex-container {
+            display: flex; /* Sử dụng flexbox để căn chỉnh các phần tử con */
+            gap: 20px; /* Thêm khoảng cách giữa các phần tử con */
+        }
+
+        .flex-item {
+            flex: 1; /* Chia đều không gian cho các phần tử con */
+            border: 1px solid #ccc; /* Thêm border cho các phần tử con */
+            padding: 20px; /* Thêm padding cho các phần tử con */
+        }
+
+        form {
+            display: flex; /* Sử dụng flexbox cho form */
+            flex-direction: column; /* Xếp các phần tử form theo chiều dọc */
+            gap: 10px; /* Thêm khoảng cách giữa các phần tử form */
+        }
+
+        label {
+            font-weight: bold; /* In đậm label */
+        }
+
+        input[type="text"],
+        input[type="submit"] {
+            padding: 8px; /* Thêm padding cho input */
+            border: 1px solid #ccc; /* Thêm border cho input */
+        }
+
+        input[type="submit"] {
+            background-color: #4CAF50; /* Màu nền cho nút submit */
+            color: white; /* Màu chữ cho nút submit */
+            cursor: pointer; /* Thay đổi con trỏ chuột khi hover vào nút submit */
+        }
+        /* CSS cho menu dropdown */
+    .dropdown {
+        position: relative;
+        display: inline-block;
+    }
+
+    .dropbtn {
+        background-color: #4CAF50;
+        color: white;
+        padding: 10px;
+        font-size: 16px;
+        border: none;
+        cursor: pointer;
+    }
+
+    .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f9f9f9;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1;
+    }
+
+    .dropdown-content ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+    }
+
+    .dropdown-content li a {
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+    }
+
+    .dropdown-content a:hover {background-color: #f1f1f1}
+
+    .dropdown:hover .dropdown-content {
+        display: block;
+    }
+
+    .arrow {
+        border: solid black;
+        border-width: 0 3px 3px 0;
+        display: inline-block;
+        padding: 3px;
+    }
+
+    .down {
+        transform: rotate(45deg);
+        -webkit-transform: rotate(45deg);
+    }
+    </style>
+</head>
+<body>
+    <div class="container"> 
+        {% block main-content %}
+        {% endblock %}
+    </div>
+</body>
+</html>
