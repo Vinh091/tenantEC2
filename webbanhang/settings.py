@@ -150,10 +150,12 @@ STATICFILES_DIRS = [
 ] 
 MEDIA_URL = '/images/'
 MEDIA_ROOT = os.path.join(BASE_DIR,'app/static/images')
+MULTITENANT_RELATIVE_MEDIA_ROOT = "tenants/%s"
 
 STORAGES = {
     "default": {
-        "BACKEND": "django_tenants.files.storage.TenantFileSystemStorage",
+        # "BACKEND": "django_tenants.files.storage.TenantFileSystemStorage",
+        "BACKEND": "app.storage.CustomSchemaStorage",
     },
     "staticfiles": {
         "BACKEND": "django.contrib.staticfiles.storage.StaticFilesStorage",
