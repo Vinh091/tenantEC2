@@ -12,6 +12,10 @@ from django_tenants.utils import schema_context
 from django.core.management import call_command
 from django.conf import settings
 from a_tenant_manager.models import *
+from django_tenants.utils import get_public_schema_name
+from django.db import connection
+from django.views.decorators.csrf import csrf_exempt
+
 
 # Create your views here.
 
@@ -100,20 +104,38 @@ def register(request):
     context ={'form':form}
     return render(request,'app/register.html',context)
 
+
+@csrf_exempt
 def loginPage(request):
+    # Redirect authenticated users
     if request.user.is_authenticated:
         return redirect('home')
+
+    # Check if the current schema is the public schema (localhost scenario)
+    current_schema = connection.schema_name
+    is_public_schema = current_schema == get_public_schema_name()
+
     if request.method == "POST":
         username = request.POST.get('username')
         password = request.POST.get('password')
-        user = authenticate(request, username = username, password = password)
+        user = authenticate(request, username=username, password=password)
+
         if user is not None:
-            login(request,user)
-            return redirect('tenant_landing')
-        else: messages.info(request,'username or password not correct!')
+            login(request, user)
+
+            # Redirect based on the current schema
+            if is_public_schema:
+                # If public schema (localhost), redirect to 'home'
+                return redirect('home')
+            else:
+                # If a tenant schema, redirect to 'tenant_landing'
+                return redirect('tenant_landing')
+        else:
+            messages.info(request, 'Username or password is not correct!')
 
     context = {}
-    return render(request,'app/login.html',context)
+    return render(request, 'app/login.html', context)
+
 def logoutPage(request):
     logout(request)
     return redirect('login')
