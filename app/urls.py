@@ -12,4 +12,5 @@ urlpatterns = [
     path('update_item/',views.updateItem, name="update_item"),
     path('tenant/',views.tenant, name="tenant"),
     path('tenant_landing/',views.tenant_landing, name="tenant_landing"),
+    path('tenant_landing/<int:tenant_id>/', views.tenant_landing, name="tenant_landing"),
 ]
